@@ -1,0 +1,6 @@
+fields:
+    tfa_is_opened:
+        label: Turn on Google two factor authentication - Google Authenticator
+        comment: Keep your account secure by enabling two-factor authentication. Each time you log in, you’ll be required to provide your password plus a randomly generated access code.
+        type: checkbox
+        default: false

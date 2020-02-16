@@ -1,0 +1,41 @@
+<div class="control-breadcrumb">
+    <ul>
+        <li>Extensions</li>
+        <li>Two factor authentication</li>
+    </ul>
+</div>
+<?= Form::open() ?>
+    <?= $formWidget->render() ?>
+
+    <button
+        id="btnGenerate"
+        data-stripe-load-indicator
+        data-attach-loading
+        data-request="onGenerate"
+        data-hotkey="ctrl+s, cmd+s"
+        class="btn btn-primary"
+        type="submit"
+        data-request-success="afterGenerate(this, data)">
+        <i class="oc-icon-qrcode"></i><?= ! $formWidget->data->tfa_is_opened ? 'Enable two factor authentication' : 'Disable two factor authentication' ?>
+    </button>
+
+<?= Form::close() ?>
+
+<script>
+    function afterGenerate(ele, data) {
+        if (data.isOpened) {
+            return $(ele).popup({handler: 'onShowPopup', extraData: {
+                image: data.qrCodeUrl,
+                secret: data.secret,
+            }});
+        } else if(data.isOpened !== undefined && ! data.isOpened) {
+            var ent = 'Enable two factor authentication';
+            $('#btnGenerate').html('<i class="oc-icon-qrcode"></i>' + ent);
+            $.oc.flashMsg({
+                'text': 'Disable two factor authentication',
+                'class': 'success',
+                'interval': 3
+            });
+        }
+    }
+</script>

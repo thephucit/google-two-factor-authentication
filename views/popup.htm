@@ -1,0 +1,69 @@
+<?= Form::open() ?>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="popup">×</button>
+        <h4 class="modal-title">Enable two factor authentication</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="form-widget form-elements layout" role="form">
+            <div class="layout-row">
+                <div class="form-tabless-fields ">
+                    <div class="form-group span-left">
+                        <label>Authentication code</label>
+                        <input type="text" name="code" class="form-control" />
+                    </div>
+
+                    <div class="form-group span-right text-center">
+                        <label>Scan the QR code with your phone</label>
+                        <img src="<?= $image ?>" class="img-responsive" alt="QR Code" style="margin-left: 13%">
+                    </div>
+
+                    <div class="form-group span-left">
+                        <label>Secret key</label>
+                        <textarea name="secret" class="form-control" rows="5" readonly style="resize: none;"><?= $secret ?></textarea>
+                    </div>
+
+                    <div class="form-group span-full">
+                        <div class="callout fade in callout-info no-subheader">
+                            <div class="header">
+                                <p>We recommend using the Google Authenticator app, which is available for Android, Apple, and BlackBerry devices.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button
+            type="submit"
+            data-request="onEnable"
+            data-hotkey="ctrl+s, cmd+s"
+            data-popup-load-indicator
+            data-request-success="afterSave(this, data)"
+            class="btn btn-primary">
+            Enable google authentication
+        </button>
+
+        <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="popup">
+            Cancel
+        </button>
+    </div>
+<?= Form::close() ?>
+
+<script>
+    function afterSave(ele, data) {
+        var ent = 'Enable two factor authentication';
+        var dit = 'Disable two factor authentication';
+
+        if ($('#Form-field-tunsecurity_is_opened').is(':checked')) {
+            $('#btnGenerate').html('<i class="oc-icon-qrcode"></i>' + dit);
+        } else {
+            $('#btnGenerate').html('<i class="oc-icon-qrcode"></i>' + ent);
+        }
+    }
+</script>

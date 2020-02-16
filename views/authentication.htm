@@ -1,0 +1,52 @@
+<style>.layout>.layout-row.min-size{display:none}.layout>.layout-cell.sidenav-tree.bg-p{display:none}.overlay{background:linear-gradient(0deg,#0b4182 1%,#1e88e5 100%)}</style>
+
+<?= Form::open() ?>
+<div class="overlay control-popup modal" style="display: block;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Please enter an authentication code below</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-widget form-elements layout" role="form">
+                    <div class="layout-row">
+                        <div class="form-tabless-fields ">
+                            <div class="form-group span-full">
+                                <label>Authentication code</label>
+                                <input type="text" name="code" class="form-control" />
+                            </div>
+
+                            <div class="form-group span-full">
+                                <div class="callout fade in callout-info no-subheader">
+                                    <div class="header">
+                                        <p>We recommend using the Google Authenticator app, which is available for Android, Apple, and BlackBerry devices.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button
+                    type="submit"
+                    data-request="onAuthenticate"
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-stripe-load-indicator
+                    class="btn btn-primary">
+                    Authenticate
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-default"
+                    data-stripe-load-indicator
+                    data-request="onCancelAuthenticate">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<?= Form::close() ?>
